@@ -1,0 +1,30 @@
+# main.py (serveur Flask minimal avec chat IA)
+
+from flask import Flask, render_template, request, jsonify
+import random
+
+app = Flask(__name__)
+
+# Exemple de réponses simples de l'IA (à améliorer avec un vrai modèle ensuite)
+REPLIES = [
+    "Je t'écoute, prends ton temps...",
+    "C'est normal de se sentir ainsi parfois.",
+    "Tu n'es pas seul(e). Dis-moi ce que tu ressens.",
+    "Merci de partager ça avec moi. Veux-tu en parler un peu plus ?",
+    "Je suis là pour toi."
+]
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_msg = request.json.get("message")
+    if not user_msg:
+        return jsonify({"reply": "Je ne comprends pas. Peux-tu reformuler ?"})
+    reply = random.choice(REPLIES)
+    return jsonify({"reply": reply})
+
+if __name__ == "__main__":
+    app.run(debug=True)
