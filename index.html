@@ -1,15 +1,24 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Écoute IA</title>
+  <title>SERENIA</title>
   <style>
     body {
       background-color: #f2f7fc;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 100px;
+    }
+    h1 {
+      font-size: 64px;
+      color: #3a3a3a;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 40px;
     }
     input[type="text"] {
       width: 60%;
@@ -24,6 +33,8 @@
       font-size: 18px;
       border-radius: 10px;
       border: none;
+      background-color: #4976f2;
+      color: white;
       cursor: pointer;
     }
     #response {
@@ -35,8 +46,8 @@
   </style>
 </head>
 <body>
-  <h1>🧠 Écoute IA</h1>
-  <p>Exprime-toi librement. L’IA t’écoute.</p>
+  <h1>SERENIA</h1>
+  <p>Ton espace de calme intérieur</p>
   <input type="text" id="userInput" placeholder="Écris ton message ici..." />
   <br>
   <button onclick="sendMessage()">Envoyer</button>
