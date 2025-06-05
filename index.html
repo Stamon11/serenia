@@ -9,64 +9,74 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #fce7f3);
       min-height: 100vh;
+      background: linear-gradient(135deg, #fbb6ce, #a3bffa);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #333;
+      color: #fff;
     }
+
     h1 {
       font-size: 64px;
       font-weight: 500;
-      color: #3b3b98;
+      color: #ffffff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
       margin-bottom: 10px;
-      letter-spacing: 2px;
     }
+
     p {
-      font-size: 18px;
+      font-size: 20px;
+      color: #f0f0f0;
       margin-bottom: 30px;
-      color: #5a5a5a;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
+
     input[type="text"] {
       width: 60%;
       max-width: 600px;
       padding: 15px 20px;
       font-size: 18px;
       border-radius: 30px;
-      border: 1px solid #ccc;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      border: none;
       outline: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
+
     .buttons {
       margin-top: 20px;
     }
+
     button {
       padding: 12px 25px;
       font-size: 16px;
       border-radius: 25px;
       border: none;
-      background-color: #5a67d8;
-      color: white;
+      background-color: #ffffff;
+      color: #5a67d8;
       cursor: pointer;
       margin: 0 10px;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
     }
+
     button:hover {
-      background-color: #434190;
+      background-color: #f3f3f3;
     }
+
     #response {
       margin-top: 40px;
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.15);
       padding: 20px;
       border-radius: 20px;
       max-width: 700px;
       width: 80%;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      white-space: pre-wrap;
+      color: #ffffff;
       font-size: 18px;
       line-height: 1.5;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      white-space: pre-wrap;
     }
   </style>
 </head>
