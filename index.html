@@ -1,30 +1,80 @@
-# main.py (serveur Flask minimal avec chat IA)
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Écoute IA</title>
+  <style>
+    body {
+      background-color: #f2f7fc;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input[type="text"] {
+      width: 60%;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    #response {
+      margin-top: 40px;
+      font-size: 20px;
+      color: #333;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Écoute IA</h1>
+  <p>Exprime-toi librement. L’IA t’écoute.</p>
+  <input type="text" id="userInput" placeholder="Écris ton message ici..." />
+  <br>
+  <button onclick="sendMessage()">Envoyer</button>
+  <button onclick="startVoiceInput()">🎤 Parler</button>
 
-from flask import Flask, render_template, request, jsonify
-import random
+  <div id="response"></div>
 
-app = Flask(__name__)
+  <script>
+    async function sendMessage() {
+      const userInput = document.getElementById('userInput').value;
+      const responseDiv = document.getElementById('response');
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message: userInput })
+      });
+      const data = await res.json();
+      responseDiv.innerText = data.reply;
+    }
 
-# Exemple de réponses simples de l'IA (à améliorer avec un vrai modèle ensuite)
-REPLIES = [
-    "Je t'écoute, prends ton temps...",
-    "C'est normal de se sentir ainsi parfois.",
-    "Tu n'es pas seul(e). Dis-moi ce que tu ressens.",
-    "Merci de partager ça avec moi. Veux-tu en parler un peu plus ?",
-    "Je suis là pour toi."
-]
+    function startVoiceInput() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'fr-FR';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+      recognition.start();
 
-@app.route("/chat", methods=["POST"])
-def chat():
-    user_msg = request.json.get("message")
-    if not user_msg:
-        return jsonify({"reply": "Je ne comprends pas. Peux-tu reformuler ?"})
-    reply = random.choice(REPLIES)
-    return jsonify({"reply": reply})
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('userInput').value = transcript;
+        sendMessage();
+      };
 
-if __name__ == "__main__":
-    app.run(debug=True)
+      recognition.onerror = function(event) {
+        alert('Erreur de reconnaissance vocale : ' + event.error);
+      };
+    }
+  </script>
+</body>
+</html>
